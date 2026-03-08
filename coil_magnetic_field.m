@@ -353,7 +353,8 @@ end
 
 function B_global = fullyInverseTransformMagneticField(B_local, local_angles_rad, rot_angles_y_rad)
     % 完全反变换：将局部坐标系中的磁场矢量完全反变换到全局坐标系
-    % 变换链：局部坐标系 → 中间坐标系（绕Z轴反旋转） → 全局坐标系（绕Y轴反旋转）
+    % 正变换为 R_y * R_z，逆变换为 R_z^{-1} * R_y^{-1}
+    % 变换链：局部坐标系 → 中间坐标系（绕Y轴反旋转） → 全局坐标系（绕Z轴反旋转）
     [n_local_frames, n_rot_angles, n_points, ~] = size(B_local);
     B_global = zeros(size(B_local));
     for k = 1:n_local_frames
